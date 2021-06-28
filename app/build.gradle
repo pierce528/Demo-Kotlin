@@ -47,7 +47,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     kapt 'androidx.room:room-compiler:2.2.6'
+    testImplementation "org.robolectric:robolectric:4.4"
+    testImplementation "androidx.test.ext:junit:1.1.2"
 
     //network
     implementation 'com.squareup.okhttp3:okhttp:3.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 }
