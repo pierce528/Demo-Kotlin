@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pierce.demo.list.R
 import com.pierce.demo.list.ui.add.AddFragment
 import com.pierce.demo.list.ui.detail.DetailFragment
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
 
@@ -19,7 +20,7 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private val mViewModel: MainViewModel by viewModel()
     private lateinit var textView: TextView
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: PassAdapter
@@ -36,11 +37,11 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        //viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         initRecyclerView()
 
         textView = requireView().findViewById(R.id.message)
-        viewModel.mUrlResult.observe(viewLifecycleOwner, Observer {
+        mViewModel.mUrlResult.observe(viewLifecycleOwner, Observer {
             textView.setText(it)
         })
     }
@@ -48,7 +49,7 @@ class MainFragment : Fragment() {
     fun initRecyclerView() {
         // Set up the RecyclerView.
         recyclerView = requireView().findViewById<View>(R.id.list) as RecyclerView
-        adapter = PassAdapter(activity, viewModel)
+        adapter = PassAdapter(activity, mViewModel)
         adapter.setOnItemClickListener(object : PassAdapter.OnItemClickListener {
             override fun onItemClick(item: ListItem) {
                 val nextFrag = DetailFragment()
@@ -69,7 +70,7 @@ class MainFragment : Fragment() {
 
         // Get all the passes from the database
         // and associate them to the adapter.
-        viewModel.getAllPasses().observe(viewLifecycleOwner, Observer {
+        mViewModel.getAllPasses().observe(viewLifecycleOwner, Observer {
             adapter.setPasses(it)
         })
     }
@@ -95,7 +96,7 @@ class MainFragment : Fragment() {
         super.onStart()
 
         //view model update trigger
-        viewModel.getUrlResult()
+        mViewModel.getUrlResult()
     }
 
 }

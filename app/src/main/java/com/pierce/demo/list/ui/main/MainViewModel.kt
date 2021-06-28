@@ -11,18 +11,18 @@ import com.pierce.demo.list.data.PassRepository
 import com.pierce.demo.list.data.URLRepository2
 import com.pierce.demo.list.room.PassData
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(repository : PassRepository, urlRepo: URLRepository2) : ViewModel() {
     //URL part
     var mUrlResult = MutableLiveData<String>()
-    var mUrlRepository: URLRepository2 = URLRepository2()
+    var mUrlRepository: URLRepository2
 
     //pass list data part
-    lateinit var mAllPasses: LiveData<List<PassData>>
-    lateinit var mPassRepository: PassRepository
-
+    var mAllPasses: LiveData<List<PassData>>
+    var mPassRepository: PassRepository
 
     init{
-        mPassRepository = PassRepository.getInstance(application)
+        mUrlRepository = urlRepo
+        mPassRepository = repository
         mAllPasses = mPassRepository.getAllPasses()
     }
 
@@ -48,10 +48,5 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 mUrlResult.postValue(result)
             }
         })
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        Log.i("Pierce", "MainViewModel onCleared")
     }
 }
