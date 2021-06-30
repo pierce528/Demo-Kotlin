@@ -9,16 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pierce.demo.list.R
+import com.pierce.demo.list.ui.common.Define
 
 class DetailFragment : Fragment() {
-    lateinit var textView: TextView
+    lateinit var mTextView: TextView
     lateinit var mViewModel: DetailViewModel
     var mId = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val args = arguments
         if (args != null) {
-            mId = args.getInt("id")
+            mId = args.getInt(Define.EXTRA_KEY_ID)
         }
     }
 
@@ -32,14 +34,14 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        textView = requireView().findViewById<View>(R.id.detail) as TextView
+        mTextView = requireView().findViewById<View>(R.id.detail) as TextView
+        mViewModel.info.observe(viewLifecycleOwner, Observer {
+            mTextView.setText(it)
+        })
     }
 
     override fun onResume() {
         super.onResume()
-        mViewModel.info.observe(viewLifecycleOwner, Observer {
-            textView.setText(it)
-        })
         mViewModel.loadData(mId)
     }
 }

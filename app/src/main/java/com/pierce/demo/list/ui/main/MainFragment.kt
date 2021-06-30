@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pierce.demo.list.R
 import com.pierce.demo.list.ui.add.AddFragment
+import com.pierce.demo.list.ui.common.Define
 import com.pierce.demo.list.ui.detail.DetailFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -53,7 +54,7 @@ class MainFragment : Fragment() {
             override fun onItemClick(item: ListItem) {
                 val nextFrag = DetailFragment()
                 val bundle = Bundle()
-                bundle.putInt("id", (item as PassItem).mData.id)
+                bundle.putInt(Define.EXTRA_KEY_ID, (item as PassItem).mData.id)
                 nextFrag.setArguments(bundle)
                 requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.container, nextFrag)

@@ -12,10 +12,10 @@ import com.pierce.demo.list.R
 
 class AddFragment : Fragment() {
     private lateinit var mViewModel: AddViewModel
-    private var dayButton: Button? = null
-    private var hourButton: Button? = null
-    private var dayEditText: EditText? = null
-    private var hourEditText: EditText? = null
+    private var mDayButton: Button? = null
+    private var mHourButton: Button? = null
+    private var mDayEditText: EditText? = null
+    private var mHourEditText: EditText? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.add_fragment, container, false)
@@ -24,16 +24,16 @@ class AddFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mViewModel = ViewModelProvider(this).get(AddViewModel::class.java)
-        dayButton = requireView().findViewById<View>(R.id.dayBtn) as Button
-        hourButton = requireView().findViewById<View>(R.id.hourBtn) as Button
-        dayEditText = requireView().findViewById<View>(R.id.dayInput) as EditText
-        hourEditText = requireView().findViewById<View>(R.id.hourInput) as EditText
-        dayButton!!.setOnClickListener {
-            mViewModel.addNewPass(0, Integer.valueOf(dayEditText!!.text.toString()))
+        mDayButton = requireView().findViewById<View>(R.id.dayBtn) as Button
+        mHourButton = requireView().findViewById<View>(R.id.hourBtn) as Button
+        mDayEditText = requireView().findViewById<View>(R.id.dayInput) as EditText
+        mHourEditText = requireView().findViewById<View>(R.id.hourInput) as EditText
+        mDayButton!!.setOnClickListener {
+            mViewModel.addNewPass(0, Integer.valueOf(mDayEditText!!.text.toString()))
             requireActivity().supportFragmentManager.popBackStack()
         }
-        hourButton!!.setOnClickListener {
-            mViewModel.addNewPass(1, Integer.valueOf(hourEditText!!.text.toString()))
+        mHourButton!!.setOnClickListener {
+            mViewModel.addNewPass(1, Integer.valueOf(mHourEditText!!.text.toString()))
             requireActivity().supportFragmentManager.popBackStack()
         }
     }
