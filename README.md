@@ -8,7 +8,7 @@ Besides, you can click on the pass list item to check the detail information abo
 through the option menu.
 
 ## Snapshot
- ![image](https://github.com/pierce528/Demo-Kotlin/blob/master/preview/preview.png)
+ <img src="https://github.com/pierce528/Demo-Kotlin/blob/master/preview/preview.png" alt="Cover" width="30%"/>
 
 ## License
 ```
