@@ -29,15 +29,15 @@ class DetailFragment : Fragment() {
         return inflater.inflate(R.layout.detail_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         mViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
         textView = requireView().findViewById<View>(R.id.detail) as TextView
     }
 
     override fun onResume() {
         super.onResume()
-        mViewModel.info.observe(this, Observer {
+        mViewModel.info.observe(viewLifecycleOwner, Observer {
             textView.setText(it)
         })
         mViewModel.loadData(mId)

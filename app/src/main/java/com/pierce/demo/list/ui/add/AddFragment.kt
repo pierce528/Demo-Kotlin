@@ -21,8 +21,8 @@ class AddFragment : Fragment() {
         return inflater.inflate(R.layout.add_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         mViewModel = ViewModelProvider(this).get(AddViewModel::class.java)
         dayButton = requireView().findViewById<View>(R.id.dayBtn) as Button
         hourButton = requireView().findViewById<View>(R.id.hourBtn) as Button
