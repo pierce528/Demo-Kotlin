@@ -35,7 +35,7 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
         mTextView = requireView().findViewById<View>(R.id.detail) as TextView
-        mViewModel.info.observe(viewLifecycleOwner, Observer {
+        mViewModel.mInfo.observe(viewLifecycleOwner, Observer {
             mTextView.setText(it)
         })
     }
