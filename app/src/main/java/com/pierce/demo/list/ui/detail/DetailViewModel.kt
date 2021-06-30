@@ -11,13 +11,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DetailViewModel(application: Application) : AndroidViewModel(application) {
-    var info = MutableLiveData<String>()
-    var sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-    var cal = Calendar.getInstance()
-    val app = application
+    var mInfo = MutableLiveData<String>()
+    var mFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    var mCalendar = Calendar.getInstance()
+    val mApp = application
 
     fun loadData(id: Int) {
-        PassRepository.getInstance(app).loadData(id, object : PassRepository.Callback2 {
+        PassRepository.getInstance(mApp).loadData(id, object : PassRepository.Callback2 {
 
             override fun onDataReady(data: PassData) {
                 val sb = StringBuilder()
@@ -31,22 +31,22 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
                         
                         """.trimIndent()
                 )
-                cal.timeInMillis = data.insertTime
+                mCalendar.timeInMillis = data.insertTime
                 sb.append(
                     """
-                        Insert at: ${sdf.format(cal.time)}
+                        Insert at: ${mFormat.format(mCalendar.time)}
                         
                         """.trimIndent()
                 )
                 if (data.status === 1) {
-                    cal.timeInMillis = data.startTime
-                    val since = sdf.format(cal.time)
-                    cal.timeInMillis = data.endTime
-                    val end = sdf.format(cal.time)
+                    mCalendar.timeInMillis = data.startTime
+                    val since = mFormat.format(mCalendar.time)
+                    mCalendar.timeInMillis = data.endTime
+                    val end = mFormat.format(mCalendar.time)
                     sb.append("Activate at : $since\n")
                     sb.append("Expire at : $end\n")
                 }
-                info.postValue(sb.toString())
+                mInfo.postValue(sb.toString())
             }
         }
         )

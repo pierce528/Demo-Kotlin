@@ -6,9 +6,9 @@ import com.pierce.demo.list.data.PassRepository
 
 
 class AddViewModel(application: Application) : AndroidViewModel(application) {
-    var app : Application = application
+    var mApp : Application = application
 
     fun addNewPass(type: Int, amount: Int) {
-        PassRepository.getInstance(app).insert(type, amount)
+        PassRepository.getInstance(mApp).insert(type, amount)
     }
 }
