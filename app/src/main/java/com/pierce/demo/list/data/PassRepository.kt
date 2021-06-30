@@ -41,20 +41,13 @@ class PassRepository private constructor(application : Application) {
         Thread(Runnable {
             mPassDao
                 .updateData(data.id, 1, now, expire)
-            Log.i("Pierce", "update done")
         }).start()
     }
 
     fun loadData(id: Int, callback: Callback2) {
-        Log.i("Pierce", "find id $id")
         Thread(Runnable {
             val data: PassData =
                     mPassDao.findDataById(id)
-            if (data == null) {
-                Log.i("Pierce", "data is null in load")
-            } else {
-                Log.i("Pierce", "loadData is ok " + data.period)
-            }
             callback.onDataReady(data)
         }).start()
     }
