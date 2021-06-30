@@ -7,6 +7,9 @@ This demo app is a pass management application, it displays all the available pa
 Besides, you can click on the pass list item to check the detail information about this pass, also you can add new pass
 through the option menu.
 
+## Snapshot
+ ![image](https://github.com/pierce528/Demo-Kotlin/blob/master/preview/preview.png)
+
 ## License
 ```
 Copyright 2021 Pierce Chen
