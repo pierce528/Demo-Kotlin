@@ -1,20 +1,17 @@
 package com.pierce.demo.list.ui.main
 
-import android.app.Application
-import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pierce.demo.list.data.PassRepository
 //import com.pierce.demo.list.data.URLRepository
-import com.pierce.demo.list.data.URLRepository2
+import com.pierce.demo.list.data.URLRepository
 import com.pierce.demo.list.room.PassData
 
-class MainViewModel(repository : PassRepository, urlRepo: URLRepository2) : ViewModel() {
+class MainViewModel(repository : PassRepository, urlRepo: URLRepository) : ViewModel() {
     //URL part
     var mUrlResult = MutableLiveData<String>()
-    var mUrlRepository: URLRepository2
+    var mUrlRepository: URLRepository
 
     //pass list data part
     var mAllPasses: LiveData<List<PassData>>
@@ -39,7 +36,7 @@ class MainViewModel(repository : PassRepository, urlRepo: URLRepository2) : View
     }
 
     fun getUrlResult() {
-        mUrlRepository.getUrlContent(object : URLRepository2.RequestCallback {
+        mUrlRepository.getUrlContent(object : URLRepository.RequestCallback {
             override fun onSuccess(result: String?) {
                 mUrlResult.postValue(result ?: "null")
             }

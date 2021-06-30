@@ -21,9 +21,9 @@ class MainFragment : Fragment() {
     }
 
     private val mViewModel: MainViewModel by viewModel()
-    private lateinit var textView: TextView
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: PassAdapter
+    private lateinit var mTextView: TextView
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var mAdapter: PassAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,17 +39,17 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
 
-        textView = requireView().findViewById(R.id.message)
+        mTextView = requireView().findViewById(R.id.message)
         mViewModel.mUrlResult.observe(viewLifecycleOwner, Observer {
-            textView.setText(it)
+            mTextView.setText(it)
         })
     }
 
     fun initRecyclerView() {
         // Set up the RecyclerView.
-        recyclerView = requireView().findViewById<View>(R.id.list) as RecyclerView
-        adapter = PassAdapter(activity, mViewModel)
-        adapter.setOnItemClickListener(object : PassAdapter.OnItemClickListener {
+        mRecyclerView = requireView().findViewById<View>(R.id.list) as RecyclerView
+        mAdapter = PassAdapter(activity, mViewModel)
+        mAdapter.setOnItemClickListener(object : PassAdapter.OnItemClickListener {
             override fun onItemClick(item: ListItem) {
                 val nextFrag = DetailFragment()
                 val bundle = Bundle()
@@ -61,16 +61,16 @@ class MainFragment : Fragment() {
                         .commit()
             }
         })
-        recyclerView.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
-        recyclerView.setAdapter(adapter)
+        mRecyclerView.setLayoutManager(LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false))
+        mRecyclerView.setAdapter(mAdapter)
         val decor = DividerItemDecoration(context, RecyclerView.VERTICAL)
         decor.setDrawable(requireActivity().getDrawable(R.drawable.divider)!!)
-        recyclerView.addItemDecoration(decor)
+        mRecyclerView.addItemDecoration(decor)
 
         // Get all the passes from the database
         // and associate them to the adapter.
         mViewModel.getAllPasses().observe(viewLifecycleOwner, Observer {
-            adapter.setPasses(it)
+            mAdapter.setPasses(it)
         })
     }
 

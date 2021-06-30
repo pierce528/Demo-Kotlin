@@ -6,12 +6,12 @@ class PassItem(data: PassData) : ListItem() {
 
     var mData: PassData
 
-    val passName: String
+    val mPassName: String
         get() =//return mPassName;
             mData.period
                 .toString() + " " + if (mData.type === 0) "DAY PASS" else "HOUR PASS"
 
-    val price: String
+    val mPrice: String
         get() =//return mPrice;
             "Rp " + mData.price
 

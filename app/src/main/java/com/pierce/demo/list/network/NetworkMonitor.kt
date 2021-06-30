@@ -11,29 +11,13 @@ import android.util.Log
 class NetworkMonitor(var mContext: Context) {
     var connectivityManager: ConnectivityManager
 
-    var tmp = test()
-
     companion object {
-        var tmp2 = test2()
         var TAG = NetworkMonitor::class.java.simpleName
         var isCellularConnected = false
         var isWIFIConnected = false
-
-        fun test2() : Int {
-            Log.i("Pierce", "test2")
-            return 5;
-        }
     }
-
-    fun test() : Int {
-        Log.i("Pierce", "test")
-        return 5;
-    }
-
-
 
     init {
-        Log.i("Pierce", "init")
         connectivityManager =
                 mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         currState()

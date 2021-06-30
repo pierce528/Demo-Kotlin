@@ -103,8 +103,8 @@ class PassAdapter(private val mActivity: FragmentActivity?, private val mViewMod
 
         fun bind(item: ListItem) {
             val pass = item as PassItem
-            title.setText(pass.passName)
-            price.setText(pass.price)
+            title.setText(pass.mPassName)
+            price.setText(pass.mPrice)
             itemView.setOnClickListener { onItemClickListener!!.onItemClick(item) }
             if (pass.mData.status === 0) {
                 setButtonState(button, true)

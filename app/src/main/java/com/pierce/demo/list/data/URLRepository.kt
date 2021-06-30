@@ -7,12 +7,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import java.io.IOException
 
 /**
  * This class is a interface for ViewModel to get URL GET result.
  */
-class URLRepository2 {
+class URLRepository {
     interface RequestCallback {
         fun onSuccess(result: String?)
         fun onFail(result: String)
@@ -43,7 +42,7 @@ class URLRepository2 {
     companion object {
         const val WIFI_URL = "http://192.168.2.2/"
         const val PUBLIC_URL = "https://code-test.migoinc-dev.com/"
-        var TAG = URLRepository2::class.java.simpleName
+        var TAG = URLRepository::class.java.simpleName
 
     }
 }
